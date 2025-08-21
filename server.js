@@ -5,8 +5,7 @@ app.get('/', (req, res) => {
     res.send({ message: "API activa" });
 });
 
-const PORT = process.env.PORT || 4000;
-
-app.listen(PORT, () => {
-    console.log(`Server running on PORT ${PORT}`);
+app.set('PORT',  process.env.PORT || 4000); 
+app.listen(app.get('PORT'), () => {
+    console.log(`Server running on PORT ${app.get('PORT')}`);
 });
