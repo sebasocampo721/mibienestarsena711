@@ -4,7 +4,7 @@ const app = express();
 
 
 // Importa todas las rutas
-const routes = require('./routes/index');
+const routes = require('./routes/apiRoutes');
 app.use('/api', routes);
 
 app.get('/', (req, res) => {
