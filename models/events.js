@@ -1,13 +1,19 @@
 'use strict';
-const { Model } = require('sequelize');
+const {
+  Model
+} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class event extends Model {
+  class events extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
     static associate(models) {
-      event.belongsTo(models.category, { foreignKey: 'categoryId' });
-      event.belongsTo(models.user, { foreignKey: 'userId' });
+      // define association here
     }
   }
-  event.init({
+  events.init({
     name: DataTypes.STRING,
     description: DataTypes.TEXT,
     startDate: DataTypes.DATE,
@@ -18,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     userId: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'event',
+    modelName: 'events',
   });
-  return event;
+  return events;
 };
