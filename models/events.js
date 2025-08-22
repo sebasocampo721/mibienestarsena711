@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
     event.belongsTo(models.category, { foreignKey: 'categoryId' });
     // Si tienes usuario, también
-    event.belongsTo(models.user, { foreignKey: 'userId' });
+    event.belongsTo(models.User, { foreignKey: 'userId' });
 }
     
   }
