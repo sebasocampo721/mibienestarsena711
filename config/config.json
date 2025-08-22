@@ -14,10 +14,17 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+  "username": "sebas721",
+  "password": "S9a4AqYtVGAtNz8DIMbhEV1MHrZQAJOG",
+  "database": "db_api_hllx",
+  "host": "dpg-d2k8m8umcj7s73a28js0-a",
+  "port": 5432,
+  "dialect": "postgres",
+  "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   }
 }
