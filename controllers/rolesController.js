@@ -1,8 +1,8 @@
-const { role } = require('../models');
+const { Role } = require('../models');
 
 exports.getAll = async (req, res) => {
   try {
-    const roles = await role.findAll();
+    const roles = await Role.findAll();
     res.json(roles);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -11,7 +11,7 @@ exports.getAll = async (req, res) => {
 
 exports.getOne = async (req, res) => {
   try {
-    const roleFound = await role.findByPk(req.params.id);
+    const roleFound = await Role.findByPk(req.params.id);
     if (!roleFound) return res.status(404).json({ message: 'Role not found' });
     res.json(roleFound);
   } catch (error) {
@@ -21,7 +21,7 @@ exports.getOne = async (req, res) => {
 
 exports.create = async (req, res) => {
   try {
-    const newRole = await role.create(req.body);
+    const newRole = await Role.create(req.body);
     res.status(201).json(newRole);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -30,9 +30,9 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const [updated] = await role.update(req.body, { where: { id: req.params.id } });
+    const [updated] = await Role.update(req.body, { where: { id: req.params.id } });
     if (updated) {
-      const updatedRole = await role.findByPk(req.params.id);
+      const updatedRole = await Role.findByPk(req.params.id);
       return res.json(updatedRole);
     }
     throw new Error('Role not found');
@@ -43,7 +43,7 @@ exports.update = async (req, res) => {
 
 exports.delete = async (req, res) => {
   try {
-    const deleted = await role.destroy({ where: { id: req.params.id } });
+    const deleted = await Role.destroy({ where: { id: req.params.id } });
     if (deleted) return res.status(204).send();
     throw new Error('Role not found');
   } catch (error) {

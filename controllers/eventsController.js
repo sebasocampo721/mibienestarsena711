@@ -1,12 +1,12 @@
-const { event, category, user } = require('../models');
+const { Event, Category, User } = require('../models');
 
 module.exports = {
   async getAll(req, res) {
     try {
-      const events = await event.findAll({
+      const events = await Event.findAll({
         include: [
-          { model: category, attributes: ["id", "name"] },
-          { model: user, attributes: ["id", "name", "email"] }
+          { model: Category, attributes: ["id", "name"] },
+          { model: User, attributes: ["id", "name", "email"] }
         ],
       });
       res.json(events);
@@ -17,10 +17,10 @@ module.exports = {
 
   async getOne(req, res) {
     try {
-      const oneEvent = await event.findByPk(req.params.id, {
+      const oneEvent = await Event.findByPk(req.params.id, {
         include: [
-          { model: category, attributes: ["id", "name"] },
-          { model: user, attributes: ["id", "name", "email"] }
+          { model: Category, attributes: ["id", "name"] },
+          { model: User, attributes: ["id", "name", "email"] }
         ],
       });
       if (!oneEvent) return res.status(404).json({ error: "Event not found" });
@@ -32,7 +32,7 @@ module.exports = {
 
   async create(req, res) {
     try {
-      const newEvent = await event.create(req.body);
+      const newEvent = await Event.create(req.body);
       res.status(201).json(newEvent);
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -41,11 +41,11 @@ module.exports = {
 
   async update(req, res) {
     try {
-      const [updated] = await event.update(req.body, {
+      const [updated] = await Event.update(req.body, {
         where: { id: req.params.id },
       });
       if (!updated) return res.status(404).json({ error: "Event not found" });
-      const updatedEvent = await event.findByPk(req.params.id);
+      const updatedEvent = await Event.findByPk(req.params.id);
       res.json(updatedEvent);
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -54,7 +54,7 @@ module.exports = {
 
   async delete(req, res) {
     try {
-      const deleted = await event.destroy({ where: { id: req.params.id } });
+      const deleted = await Event.destroy({ where: { id: req.params.id } });
       if (!deleted) return res.status(404).json({ error: "Event not found" });
       res.json({ message: "Event deleted" });
     } catch (error) {

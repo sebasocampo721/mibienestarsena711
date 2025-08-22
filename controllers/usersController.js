@@ -1,9 +1,9 @@
-const { user } = require('../models');
+const { User } = require('../models');
 
 module.exports = {
   async getAll(req, res) {
     try {
-      const users = await user.findAll();
+      const users = await User.findAll();
       res.json(users);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -12,7 +12,7 @@ module.exports = {
 
   async getOne(req, res) {
     try {
-      const oneUser = await user.findByPk(req.params.id);
+      const oneUser = await User.findByPk(req.params.id);
       if (!oneUser) return res.status(404).json({ error: "User not found" });
       res.json(oneUser);
     } catch (error) {
@@ -22,7 +22,7 @@ module.exports = {
 
   async create(req, res) {
     try {
-      const newUser = await user.create(req.body);
+      const newUser = await User.create(req.body);
       res.status(201).json(newUser);
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -31,11 +31,11 @@ module.exports = {
 
   async update(req, res) {
     try {
-      const [updated] = await user.update(req.body, {
+      const [updated] = await User.update(req.body, {
         where: { id: req.params.id },
       });
       if (!updated) return res.status(404).json({ error: "User not found" });
-      const updatedUser = await user.findByPk(req.params.id);
+      const updatedUser = await User.findByPk(req.params.id);
       res.json(updatedUser);
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -44,7 +44,7 @@ module.exports = {
 
   async delete(req, res) {
     try {
-      const deleted = await user.destroy({ where: { id: req.params.id } });
+      const deleted = await User.destroy({ where: { id: req.params.id } });
       if (!deleted) return res.status(404).json({ error: "User not found" });
       res.json({ message: "User deleted" });
     } catch (error) {

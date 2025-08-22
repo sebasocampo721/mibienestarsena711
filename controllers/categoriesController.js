@@ -1,9 +1,9 @@
-const { category } = require('../models');
+const { Category } = require('../models');
 
 module.exports = {
   async getAll(req, res) {
     try {
-      const categories = await category.findAll();
+      const categories = await Category.findAll();
       res.json(categories);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -12,7 +12,7 @@ module.exports = {
 
   async getOne(req, res) {
     try {
-      const oneCategory = await category.findByPk(req.params.id);
+      const oneCategory = await Category.findByPk(req.params.id);
       if (!oneCategory) return res.status(404).json({ error: "Category not found" });
       res.json(oneCategory);
     } catch (error) {
@@ -22,7 +22,7 @@ module.exports = {
 
   async create(req, res) {
     try {
-      const newCategory = await category.create(req.body);
+      const newCategory = await Category.create(req.body);
       res.status(201).json(newCategory);
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -31,11 +31,11 @@ module.exports = {
 
   async update(req, res) {
     try {
-      const [updated] = await category.update(req.body, {
+      const [updated] = await Category.update(req.body, {
         where: { id: req.params.id },
       });
       if (!updated) return res.status(404).json({ error: "Category not found" });
-      const updatedCategory = await category.findByPk(req.params.id);
+      const updatedCategory = await Category.findByPk(req.params.id);
       res.json(updatedCategory);
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -44,7 +44,7 @@ module.exports = {
 
   async delete(req, res) {
     try {
-      const deleted = await category.destroy({ where: { id: req.params.id } });
+      const deleted = await Category.destroy({ where: { id: req.params.id } });
       if (!deleted) return res.status(404).json({ error: "Category not found" });
       res.json({ message: "Category deleted" });
     } catch (error) {
