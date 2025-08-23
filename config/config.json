@@ -17,10 +17,10 @@
   "username": "sebas721",
   "password": "S9a4AqYtVGAtNz8DIMbhEV1MHrZQAJOG",
   "database": "db_api_hllx",
-  "host": "dpg-d2k8m8umcj7s73a28js0-a",
+  "host": "dpg-d2k8m8umcj7s73a28js0-a.oregon-postgres.render.com",
   "port": 5432,
   "dialect": "postgres",
-  "dialectOptions": {
+    "dialectOptions": {
       "ssl": {
         "require": true,
         "rejectUnauthorized": false
