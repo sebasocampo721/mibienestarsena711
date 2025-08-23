@@ -5,7 +5,7 @@ module.exports = {
     try {
       const events = await Event.findAll({
         include: [
-          { model: Category, attributes: ["id", "username"] },
+          { model: Category, attributes: ["id", "name"] },
           { model: User, attributes: ["id", "username", "email"] }
         ],
       });
@@ -19,7 +19,7 @@ module.exports = {
     try {
       const oneEvent = await Event.findByPk(req.params.id, {
         include: [
-          { model: Category, attributes: ["id", "username"] },
+          { model: Category, attributes: ["id", "name"] },
           { model: User, attributes: ["id", "username", "email"] }
         ],
       });
