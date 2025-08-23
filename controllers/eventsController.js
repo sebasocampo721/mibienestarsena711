@@ -5,8 +5,8 @@ module.exports = {
     try {
       const events = await Event.findAll({
         include: [
-          { model: Category, attributes: ["id", "name"] },
-          { model: User, attributes: ["id", "name", "email"] }
+          { model: Category, attributes: ["id", "username"] },
+          { model: User, attributes: ["id", "username", "email"] }
         ],
       });
       res.json(events);
@@ -19,8 +19,8 @@ module.exports = {
     try {
       const oneEvent = await Event.findByPk(req.params.id, {
         include: [
-          { model: Category, attributes: ["id", "name"] },
-          { model: User, attributes: ["id", "name", "email"] }
+          { model: Category, attributes: ["id", "username"] },
+          { model: User, attributes: ["id", "username", "email"] }
         ],
       });
       if (!oneEvent) return res.status(404).json({ error: "Event not found" });
