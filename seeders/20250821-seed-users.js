@@ -40,3 +40,5 @@ module.exports = {
     await queryInterface.bulkDelete('Users', null, {});
   }
 };
+
+

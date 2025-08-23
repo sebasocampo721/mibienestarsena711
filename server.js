@@ -1,13 +1,22 @@
 const express = require('express');
+const cors = require('cors'); // 👈 importa cors
 const app = express();
 
-// Para que pueda leer JSON en el body de Postman
+//Habilitar CORS
+app.use(cors({
+  origin: '*', // aquí puedes poner la URL de tu app Flutter si quieres restringir
+  methods: ['GET','POST','PUT','DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+//Para que pueda leer JSON en el body de Postman
 app.use(express.json());
 
 // Importa todas las rutas
 const routes = require('./routes/apiRoutes');
 app.use('/api', routes);
 
+// Ruta de prueba
 app.get('/', (req, res) => {
   res.send({ message: "API activa" });
 });
